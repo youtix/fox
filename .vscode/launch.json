@@ -1,0 +1,26 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "bun",
+      "internalConsoleOptions": "neverOpen",
+      "request": "launch",
+      "name": "Debug File",
+      "program": "src/index.ts",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--strategy.period",
+        "12,20",
+        "--strategy.thresholds.up",
+        "25,26",
+        "--strategy.thresholds.down",
+        "25,26"
+      ],
+      "stopOnEntry": false,
+      "watchMode": false
+    }
+  ]
+}
