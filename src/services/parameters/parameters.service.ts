@@ -4,11 +4,12 @@ import { DEFAULTS } from './parameters.const';
 
 export function buildProgram(): Command {
   return new Command()
-    .name('fox-cli')
+    .name('fox')
     .description('Fox program helps Gekko find the best strategy')
     .option('-w, --max-workers <number>', 'Maximum number of workers to use')
     .option('-t, --template-path <string>', 'Path to the template file')
     .option('-g, --gekko-folder <string>', 'Folder path for Gekko configuration files')
+    .option('-s, --gekko-script <string>', 'Gekko script path')
     .allowUnknownOption(true)
     .allowExcessArguments(true);
 }
@@ -26,11 +27,12 @@ export function parseFoxCliArgs(argv: string[] = process.argv.slice(2), env = pr
   return {
     maxWorkers: +(opts.maxWorkers ?? env.FOX_MAX_WORKER ?? DEFAULTS.MAX_WORKERS),
     gekkoConfigFolderPath: opts.gekkoFolder ?? env.FOX_GEKKO_CONFIG_FOLDER_PATH ?? DEFAULTS.GEKKO_CONFIG_DIR,
+    gekkoScript: opts.gekkoScript ?? env.FOX_GEKKO_SCRIPT ?? DEFAULTS.GEKKO_SCRIPT,
     templatePath: opts.templatePath ?? env.FOX_TEMPLATE_PATH ?? DEFAULTS.TEMPLATE_PATH,
     unknownArgs,
   };
 }
 
-const { maxWorkers, templatePath, gekkoConfigFolderPath, unknownArgs } = parseFoxCliArgs();
+const { maxWorkers, templatePath, gekkoConfigFolderPath, gekkoScript, unknownArgs } = parseFoxCliArgs();
 
-export { gekkoConfigFolderPath, maxWorkers, templatePath, unknownArgs };
+export { gekkoConfigFolderPath, gekkoScript, maxWorkers, templatePath, unknownArgs };
