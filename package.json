@@ -1,15 +1,15 @@
 {
   "name": "fox",
-  "module": "index.ts",
+  "module": "fox.ts",
   "type": "module",
   "private": false,
   "scripts": {
-    "build": "bun build src/index.ts --outdir=dist --minify",
+    "build": "bun build src/fox.ts --outdir=dist --minify",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "type:check": "tsc --noEmit",
-    "dev": "bun src/index.ts",
+    "dev": "bun src/fox.ts",
     "prepare": "husky install"
   },
   "devDependencies": {
