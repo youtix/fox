@@ -2,7 +2,7 @@ import { dump } from 'js-yaml';
 import path from 'path';
 import type { WorkerArguments } from '../../types/worker.types';
 import { debug, error, info } from '../logger/logger.service';
-import { gekkoConfigFolderPath, maxWorkers } from '../parameters/parameters.service';
+import { gekkoConfigFolderPath, gekkoScript, maxWorkers } from '../parameters/parameters.service';
 
 export const runWorker = async (
   args: WorkerArguments,
@@ -51,7 +51,7 @@ export const runWorkerBatch = async (configs: object[]) => {
   info(`Launching ${configs.length} worker(s)`);
   const results = await Promise.allSettled(
     configs.map((config, index) =>
-      runWorker({ workerId: index + 1, configuration: dump(config), gekkoConfigFolderPath }),
+      runWorker({ workerId: index + 1, configuration: dump(config), gekkoConfigFolderPath, gekkoScript }),
     ),
   );
   results.filter(r => r.status === 'rejected').forEach(r => error(`Worker batch rejected: ${r.reason}`));

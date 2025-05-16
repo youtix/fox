@@ -8,7 +8,7 @@ watch:
 
 storage:
   type: sqlite
-  database: ./db/gekko.sql
+  database: ../gekko2/db/gekko.sql
 
 strategy:
   name: DEMA
