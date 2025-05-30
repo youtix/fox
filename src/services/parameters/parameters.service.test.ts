@@ -14,7 +14,7 @@ describe('buildProgram', () => {
     const program = buildProgram();
 
     // Basic metadata
-    expect(program.name()).toBe('fox-cli');
+    expect(program.name()).toBe('fox');
     expect(program.description()).toMatch(/Fox program/);
 
     // Parse a sample arg vector to ensure the options exist & are wired

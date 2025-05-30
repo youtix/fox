@@ -16,12 +16,16 @@ describe('countDecimals', () => {
 
 describe('buildRange', () => {
   it.each`
-    bounds          | expected
-    ${[1, 3]}       | ${[1, 2, 3]}
-    ${[0.1, 0.3]}   | ${[0.1, 0.2, 0.3]}
-    ${[1.05, 1.07]} | ${[1.05, 1.06, 1.07]}
+    bounds               | expected
+    ${[1, 3]}            | ${[1, 2, 3]}
+    ${[1, 3, 2]}         | ${[1, 3]}
+    ${[1, 4, 2]}         | ${[1, 3, 4]}
+    ${[0.1, 0.3]}        | ${[0.1, 0.2, 0.3]}
+    ${[1.05, 1.07]}      | ${[1.05, 1.06, 1.07]}
+    ${[1.05, 1.07, 2]}   | ${[1.05, 1.07]}
+    ${[1.05, 1.1, 0.02]} | ${[1.05, 1.07, 1.09, 1.1]}
   `('should yields the inclusive sequence $expected from $bounds', ({ bounds, expected }) => {
-    const result = [...buildRange(bounds as [number, number])];
+    const result = [...buildRange(bounds)];
     expect(result).toEqual(expected);
   });
 
@@ -31,8 +35,6 @@ describe('buildRange', () => {
     ${[Infinity, 5]}
     ${[0, -Infinity]}
   `('should throws on invalid bounds $bounds', ({ bounds }) => {
-    expect(() => [...buildRange(bounds as [number, number])]).toThrow(
-      /Range bounds must be finite numbers in ascending order/,
-    );
+    expect(() => [...buildRange(bounds)]).toThrow(/Range bounds must be finite numbers in ascending order/);
   });
 });

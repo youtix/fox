@@ -3,8 +3,12 @@ import { buildRange } from '../../utils/number/number.utils';
 import { isPlainObject } from '../../utils/object/object.utils';
 
 function* expandValue(value?: unknown): Generator<unknown> {
-  if (Array.isArray(value) && value.length === 2 && value.every(v => typeof v === 'number' && Number.isFinite(v))) {
-    yield* buildRange(value as [number, number]);
+  if (
+    Array.isArray(value) &&
+    (value.length === 2 || value.length === 3) &&
+    value.every(v => typeof v === 'number' && Number.isFinite(v))
+  ) {
+    yield* buildRange(value as [number, number, number?]);
     return;
   }
 

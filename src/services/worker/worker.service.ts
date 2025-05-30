@@ -1,4 +1,5 @@
 import { dump } from 'js-yaml';
+import { merge } from 'lodash-es';
 import path from 'path';
 import type { WorkerArguments } from '../../types/worker.types';
 import { debug, error, info } from '../logger/logger.service';
@@ -34,7 +35,7 @@ export const runWorkers = async (argsConfigs: Generator<{ [x: string]: any }>, t
   const configs: object[] = [];
   for (const argsConfig of argsConfigs) {
     // Override template with arguments config
-    configs.push(Object.assign({}, template, argsConfig));
+    configs.push(merge({}, template, argsConfig));
     if (configs.length === maxWorkers) {
       await runWorkerBatch(configs);
       configs.length = 0;
