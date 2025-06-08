@@ -8,6 +8,7 @@
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "type:check": "tsc --noEmit",
     "dev": "bun src/index.ts"
   },
   "devDependencies": {
