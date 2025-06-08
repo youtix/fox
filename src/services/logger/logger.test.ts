@@ -20,9 +20,9 @@ describe('logger helpers', () => {
     ${'info'}    | ${'info'}
     ${'warning'} | ${'warn'}
     ${'error'}   | ${'error'}
-  `('$fn forwards to winston with level=$level', ({ fn, level }) => {
+  `('$fn forwards to winston with level=$level', ({ fn, level }: { fn: keyof typeof logger; level: string }) => {
     mockLog.mockClear();
-    (logger as any)[fn]('hello');
+    logger[fn]('hello');
 
     expect(mockLog).toHaveBeenCalledWith({ level, message: 'hello' });
   });

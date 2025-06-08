@@ -3,7 +3,7 @@ import { spawn } from 'bun';
 import { rm, writeFile } from 'fs/promises';
 import path from 'path';
 
-declare var self: Worker;
+declare let self: Worker;
 
 self.onmessage = async (event: MessageEvent<WorkerArguments>) => {
   const { workerId, gekkoConfigFolderPath, configuration, gekkoScript } = event.data;
