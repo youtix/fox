@@ -1,23 +1,21 @@
 import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
-import * as SUT from './worker.service';
+import { debug, error, info } from '../logger/logger.service';
+import { runWorker, runWorkerBatch, runWorkers } from './worker.service';
 
 vi.mock('js-yaml', () => ({
   dump: (obj: unknown) => JSON.stringify(obj),
 }));
 
-vi.mock('../logger/logger', () => ({
+vi.mock(import('../logger/logger.service'), () => ({
   debug: vi.fn(),
   info: vi.fn(),
   error: vi.fn(),
 }));
 
-vi.mock('../parameters/parameters.service', () => ({
+vi.mock(import('../parameters/parameters.service'), () => ({
   gekkoConfigFolderPath: '/gekko/cfg',
   maxWorkers: 2,
 }));
-
-const { runWorker, runWorkers, runWorkerBatch } = SUT;
-const { debug, info, error } = await import('../logger/logger.service');
 
 function makeWorkerClass(shouldReject: (id: number) => boolean = () => false) {
   return class {
