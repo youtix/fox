@@ -20,7 +20,7 @@ export const runWorker = async (
         debug(event.data);
         resolve(event.data);
       };
-      worker.onerror = (errorEvent: ErrorEvent): any => {
+      worker.onerror = (errorEvent: ErrorEvent) => {
         error(`Worker error: ${errorEvent.message}`);
         reject();
       };
@@ -31,7 +31,7 @@ export const runWorker = async (
     }
   });
 
-export const runWorkers = async (argsConfigs: Generator<{ [x: string]: any }>, template: {}): Promise<void> => {
+export const runWorkers = async (argsConfigs: Generator<{ [x: string]: unknown }>, template: object): Promise<void> => {
   const configs: object[] = [];
   for (const argsConfig of argsConfigs) {
     // Override template with arguments config
