@@ -2,7 +2,6 @@
 
 ![Bud Fox](https://github.com/user-attachments/assets/bf70231b-81ad-4c0f-a272-51a63928c1c3)
 
-
 _The most valuable commodity I know of is information._
 
 -Bud Fox
