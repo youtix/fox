@@ -20,8 +20,8 @@ vi.mock(import('../parameters/parameters.service'), () => ({
 
 function makeWorkerClass(shouldReject: (id: number) => boolean = () => false) {
   return class {
-    onmessage: ((ev: any) => void) | null = null;
-    onerror: ((ev: any) => void) | null = null;
+    onmessage: ((ev: unknown) => void) | null = null;
+    onerror: ((ev: unknown) => void) | null = null;
 
     unref() {
       /* noop */
