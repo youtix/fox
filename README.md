@@ -18,3 +18,4 @@ Fox is a CLI utility that generates YAML configs and spins up parallel workers t
 - `bun run type:check` - run TypeScript type checking
 - `bun run lint` - check for linting issues
 - `bun run lint:fix` - automatically fix linting issues
+- `bun run commit:check` - validate commit messages follow Conventional Commits
