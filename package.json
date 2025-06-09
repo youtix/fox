@@ -3,6 +3,23 @@
   "module": "fox.ts",
   "type": "module",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youtix/fox.git"
+  },
+  "homepage": "https://github.com/youtix/fox#readme",
+  "bugs": {
+    "url": "https://github.com/youtix/fox/issues"
+  },
+  "author": "youtix",
+  "license": "MIT",
+  "keywords": [
+    "backtest",
+    "gekko2",
+    "gekko",
+    "trading",
+    "bun"
+  ],
   "scripts": {
     "build": "bun build src/fox.ts --outdir=dist --minify",
     "commit:check": "commitlint --from=HEAD~10",
