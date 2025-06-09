@@ -21,7 +21,7 @@
     "bun"
   ],
   "scripts": {
-    "build": "bun build src/fox.ts --outdir=dist --minify",
+    "build": "bun build src/fox.ts --compile --outfile dist/fox",
     "commit:check": "commitlint --from=HEAD~10",
     "dev": "bun src/fox.ts",
     "format": "prettier --write \"./**/*.{cjs,js,ts,yml,json,md}\"",

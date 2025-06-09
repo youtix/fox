@@ -50,7 +50,7 @@ This will generate the various configuration files and back-test them in paralle
 
 ## Available Scripts
 
-- `bun run build` - compile the source into the `dist` directory
+- `bun run build` - compile a standalone executable to `dist/fox`
 - `bun run dev` - run the CLI in development mode
 - `bun run format` - format project files with Prettier
 - `bun run format:check` - verify formatting without changing files
