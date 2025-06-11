@@ -9,7 +9,12 @@ module.exports = {
         changelogFile: 'CHANGELOG.md',
       },
     ],
-    '@semantic-release/github',
+    [
+      '@semantic-release/github',
+      {
+        assets: ['dist/fox'],
+      },
+    ],
     [
       '@semantic-release/git',
       {
