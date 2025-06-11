@@ -2,12 +2,12 @@ export type FoxArguments = {
   maxWorkers: number;
   templatePath: string;
   gekkoFolder: string;
-  gekkoScript: string;
+  gekkoExec: string;
 };
 export type WorkerArguments = {
   workerId: number;
   gekkoConfigFolderPath: string;
-  gekkoScript: string;
+  gekkoExec: string;
   configuration: string;
 };
 export type Primitive = string | number | boolean | null;

@@ -15,7 +15,7 @@ vi.mock(import('../logger/logger.service'), () => ({
 vi.mock(import('../parameters/parameters.service'), () => ({
   gekkoConfigFolderPath: '/gekko/cfg',
   maxWorkers: 2,
-  gekkoScript: '/gekko/script.js',
+  gekkoExec: '/gekko/gekkoExec',
 }));
 
 function makeWorkerClass(shouldReject: (id: number) => boolean = () => false) {
@@ -58,7 +58,7 @@ describe('worker service', () => {
         workerId: 1,
         configuration: '',
         gekkoConfigFolderPath: '',
-        gekkoScript: '',
+        gekkoExec: '',
       });
 
       if (shouldReject) {
