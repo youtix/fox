@@ -5,8 +5,8 @@ watch:
   currency: USDT
   mode: backtest
   daterange:
-    start: '2024-01-01T00:00:00.000Z'
-    end: '2024-01-31T00:00:00.000Z'
+    start: '2020-01-01T00:00:00.000Z'
+    end: '2025-05-01T00:00:00.000Z'
 
 storage:
   type: sqlite
@@ -16,13 +16,13 @@ strategy:
   name: DEMA
   period: 12
   thresholds:
-    up: 500
-    down: -500
+    up: 0
+    down: 0
 
 plugins:
   - name: TradingAdvisor
     strategyName: DEMA
-    timeframe: '1h'
+    timeframe: '1d'
     historySize: 0
 
   - name: PaperTrader
@@ -41,3 +41,4 @@ plugins:
     riskFreeReturn: 5
 
   - name: PerformanceReporter
+    fileName: DEMA_performance_reports.csv

@@ -6,7 +6,7 @@ import path from 'path';
 declare let self: Worker;
 
 self.onmessage = async (event: MessageEvent<WorkerArguments>) => {
-  const { workerId, gekkoConfigFolderPath, configuration, gekkoScript } = event.data;
+  const { workerId, gekkoConfigFolderPath, configuration, gekkoExec } = event.data;
   const configFilePath = path.join(gekkoConfigFolderPath, `config-${workerId}.yml`);
   await rm(configFilePath, { force: true });
   await writeFile(configFilePath, configuration, 'utf-8');
@@ -17,7 +17,7 @@ self.onmessage = async (event: MessageEvent<WorkerArguments>) => {
     GEKKO_CONFIG_FILE_PATH: configFilePath,
   };
 
-  const proc = spawn({ cmd: ['bun', gekkoScript], env, stdout: 'inherit' });
+  const proc = spawn({ cmd: [gekkoExec], env, stdout: 'inherit' });
   await proc.exited;
 
   const usage = proc.resourceUsage();
