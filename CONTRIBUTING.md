@@ -7,7 +7,7 @@ Thank you for considering contributing to Fox! This guide explains how to get th
 ### Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/youtix/fox.git
 cd fox
 ```
 
