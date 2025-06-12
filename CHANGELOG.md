@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/youtix/fox/compare/v1.0.0...v1.1.0) (2025-06-12)
+
+### Features
+
+- use Gekko CLI executable instead of direct JS script ([89e6f13](https://github.com/youtix/fox/commit/89e6f130c6b5826e609ed8a9996a0e39af67819d))
+
 # 1.0.0 (2025-06-09)
 
 ### Features
