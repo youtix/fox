@@ -3,7 +3,7 @@ import { merge } from 'lodash-es';
 import path from 'path';
 import type { WorkerArguments } from '../../types/worker.types';
 import { debug, error, info } from '../logger/logger.service';
-import { gekkoConfigFolderPath, gekkoExec, maxWorkers } from '../parameters/parameters.service';
+import { gekkoConfigFolderPath, gekkoExec, maxWorkers, workerPath } from '../parameters/parameters.service';
 
 export const runWorker = async (
   args: WorkerArguments,
@@ -52,7 +52,7 @@ export const runWorkerBatch = async (configs: object[]) => {
   info(`Launching ${configs.length} worker(s)`);
   const results = await Promise.allSettled(
     configs.map((config, index) =>
-      runWorker({ workerId: index + 1, configuration: dump(config), gekkoConfigFolderPath, gekkoExec }),
+      runWorker({ workerId: index + 1, configuration: dump(config), gekkoConfigFolderPath, gekkoExec }, workerPath),
     ),
   );
   results.filter(r => r.status === 'rejected').forEach(r => error(`Worker batch rejected: ${r.reason}`));

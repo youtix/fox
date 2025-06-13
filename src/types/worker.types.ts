@@ -3,6 +3,7 @@ export type FoxArguments = {
   templatePath: string;
   gekkoFolder: string;
   gekkoExec: string;
+  workerPath: string;
 };
 export type WorkerArguments = {
   workerId: number;
