@@ -4,13 +4,14 @@ watch:
   asset: BTC
   currency: USDT
   mode: backtest
+  timeframe: '1d'
   daterange:
     start: '2020-01-01T00:00:00.000Z'
     end: '2025-05-01T00:00:00.000Z'
 
 storage:
   type: sqlite
-  database: ../gekko2/db/gekko.sql
+  database: ../gekko2/db/binance-BTC_USDT.sql
 
 strategy:
   name: TMA
@@ -22,8 +23,6 @@ strategy:
 plugins:
   - name: TradingAdvisor
     strategyName: TMA
-    timeframe: '1d'
-    historySize: 0
 
   - name: PaperTrader
     reportInCurrency: true # report the profit in the currency or the asset?

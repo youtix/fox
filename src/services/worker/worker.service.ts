@@ -32,20 +32,37 @@ export const runWorker = async (
   });
 
 export const runWorkers = async (argsConfigs: Generator<{ [x: string]: unknown }>, template: object): Promise<void> => {
-  const configs: object[] = [];
+  const running: Promise<unknown>[] = [];
+  let workerId = 0;
+
   for (const argsConfig of argsConfigs) {
-    // Override template with arguments config
-    configs.push(merge({}, template, argsConfig));
-    if (configs.length === maxWorkers) {
-      await runWorkerBatch(configs);
-      configs.length = 0;
-    }
+    const config = merge({}, template, argsConfig);
+    workerId += 1;
+
+    const workerPromise = runWorker(
+      {
+        workerId,
+        configuration: dump(config),
+        gekkoConfigFolderPath,
+        gekkoExec,
+      },
+      workerPath,
+    )
+      .catch(reason => {
+        error(`Worker queue rejected: ${reason}`);
+      })
+      .finally(() => {
+        const idx = running.indexOf(workerPromise);
+        if (idx !== -1) running.splice(idx, 1);
+      });
+
+    running.push(workerPromise);
+    info(`Launching worker ${workerId}`);
+
+    if (running.length >= maxWorkers) await Promise.race(running);
   }
-  // Flush remaining workers
-  if (configs.length) {
-    await runWorkerBatch(configs);
-    configs.length = 0;
-  }
+
+  await Promise.allSettled(running);
 };
 
 export const runWorkerBatch = async (configs: object[]) => {

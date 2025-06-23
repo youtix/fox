@@ -20,6 +20,8 @@ self.onmessage = async (event: MessageEvent<WorkerArguments>) => {
   const proc = spawn({ cmd: [gekkoExec], env, stdout: 'inherit' });
   await proc.exited;
 
+  await rm(configFilePath, { force: true });
+
   const usage = proc.resourceUsage();
 
   postMessage(
