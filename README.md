@@ -47,6 +47,8 @@ bun run dev -- --strategy.name DEMA --strategy.period 12,24 --strategy.threshold
 ```
 
 This will generate the various configuration files and back-test them in parallel workers.
+The `--max-workers` option controls how many workers can run at the same time.
+New workers start automatically as soon as a slot is free.
 
 ## Available Scripts
 

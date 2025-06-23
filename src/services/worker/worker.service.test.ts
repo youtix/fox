@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
+import { afterEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { debug, error, info } from '../logger/logger.service';
 import { runWorker, runWorkerBatch, runWorkers } from './worker.service';
 
@@ -74,20 +74,36 @@ describe('worker service', () => {
   });
 
   describe('runWorkers', () => {
-    beforeEach(() => {
-      global.Worker = makeWorkerClass();
-    });
+    it('should limit concurrency according to "maxWorkers"', async () => {
+      let active = 0;
+      let maxActive = 0;
 
-    it('should flushes batches whenever "maxWorkers" is reached and once at the end', async () => {
+      global.Worker = class {
+        onmessage: ((ev: unknown) => void) | null = null;
+        onerror: ((ev: unknown) => void) | null = null;
+
+        unref() {
+          /* noop */
+        }
+
+        postMessage(args: { workerId: number }) {
+          active += 1;
+          maxActive = Math.max(maxActive, active);
+          setTimeout(() => {
+            active -= 1;
+            this.onmessage?.({ data: `done-${args.workerId}` });
+          }, 0);
+        }
+      } as unknown as typeof Worker;
+
       function* gen(n: number) {
         for (let i = 0; i < n; i++) yield { id: i };
       }
 
-      await runWorkers(gen(5), { foo: 'bar' }); // 5 items, maxWorkers = 2
+      await runWorkers(gen(5), { foo: 'bar' });
 
-      // Expect 3 batches: 2 + 2 + 1
-      const launchMsgs = (info as Mock).mock.calls.map(([m]) => m as string);
-      expect(launchMsgs).toEqual(['Launching 2 worker(s)', 'Launching 2 worker(s)', 'Launching 1 worker(s)']);
+      expect(maxActive).toBeLessThanOrEqual(2);
+      expect((info as Mock).mock.calls).toHaveLength(5);
     });
   });
 
