@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/youtix/fox/compare/v1.1.0...v1.2.0) (2025-06-27)
+
+### Features
+
+- add argument to support custom worker location ([bc4f173](https://github.com/youtix/fox/commit/bc4f17369e2d1070c2fbc98da5cdc6bf902f0b1b))
+- **worker:** implement concurrent worker queue ([23eb458](https://github.com/youtix/fox/commit/23eb4586327b300376b2cf2c415f01b3d62ca26b))
+
 # [1.1.0](https://github.com/youtix/fox/compare/v1.0.0...v1.1.0) (2025-06-12)
 
 ### Features
