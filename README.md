@@ -23,6 +23,7 @@ Fox is a CLI utility that generates YAML configs and spins up parallel workers t
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Gekko Worker](#gekko-worker)
 - [Available Scripts](#available-scripts)
 - [Contributing](#contributing)
 - [License](#license)
@@ -49,6 +50,13 @@ bun run dev -- --strategy.name DEMA --strategy.period 12,24 --strategy.threshold
 This will generate the various configuration files and back-test them in parallel workers.
 The `--max-workers` option controls how many workers can run at the same time.
 New workers start automatically as soon as a slot is free.
+
+## Gekko Worker
+
+The `src/workers/gekkoWorker.ts` script runs inside a Bun worker. It writes a
+temporary configuration file, launches the Gekko executable and reports basic
+resource usage once the back test completes. The worker always cleans up the
+generated file and terminates when done.
 
 ## Available Scripts
 
