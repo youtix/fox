@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/youtix/fox/compare/v1.2.0...v1.2.1) (2025-07-01)
+
+### Bug Fixes
+
+- clean up worker correctly after using it ([8dfce26](https://github.com/youtix/fox/commit/8dfce26a0662d9936616eb1fdb0f899f15d45c6e))
+
 # [1.2.0](https://github.com/youtix/fox/compare/v1.1.0...v1.2.0) (2025-06-27)
 
 ### Features
